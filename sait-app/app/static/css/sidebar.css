@@ -184,7 +184,8 @@ a.article:hover {
     padding: 20px;
     min-height: 100vh;
     transition: all 0.3s;
-    background: linear-gradient(to left, #ece9e6, #ffffff);
+    background-image: url("../img/14763.jpg");
+    background-size: cover;
 }
 
 /* ---------------------------------------------------
