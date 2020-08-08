@@ -31,7 +31,7 @@
                 <a href="#">Dashboard</a>
             </li>
             <li>
-                <a href="#">Servicios</a>
+                <a href="/servicios">Servicios</a>
             </li>
             <li>
                 <a href="#">Licencias</a>
@@ -71,7 +71,7 @@
 
                 <strong class="titulo">Empresa cliente</strong>
 
-                <a class="navbar-brand mr-sm-2 d-none d-md-block" href="#">
+                <a id="logout" tabindex="0" data-toggle="popover" data-trigger="focus" data-content="Cerrar sesion" class="navbar-brand mr-sm-2 d-none d-md-block" href="#">
                     <img src="static/img/out.png" style="width: 25px; height: 25px;" alt="Log out" id="ico">
                 </a>
             </div>
@@ -90,11 +90,19 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/js/bootstrap.min.js"
         integrity="sha384-XEerZL0cuoUbHE4nZReLT7nx9gQrQreJekYhJD9WNWhH8nEW+0c5qq7aIo2Wl30J"
         crossorigin="anonymous"></script>
-<script type="text/javascript">
+        <script src="static/js/layoutscript.js"></script>
+<!--<script type="text/javascript">
         $(document).ready(function () {
             $('#sidebarCollapse').on('click', function () {
                 $('#sidebar').toggleClass('active');
             });
-        });</script>
+        });
+        $(function () {
+  $('#pop').popover({
+    placement:"bottom",
+    trigger:"hover"
+  })
+});
+    </script>-->
 </body>
 </html>
