@@ -34,13 +34,10 @@
                 <a href="/servicios">Servicios</a>
             </li>
             <li>
-                <a href="#">Licencias</a>
-            </li>
-            <li>
                 <a href="#">Activos</a>
             </li>
             <li>
-                <a href="#">Contratos</a>
+                <a href="#">Software</a>
             </li>
             <li>
                 <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
@@ -91,18 +88,7 @@
         integrity="sha384-XEerZL0cuoUbHE4nZReLT7nx9gQrQreJekYhJD9WNWhH8nEW+0c5qq7aIo2Wl30J"
         crossorigin="anonymous"></script>
         <script src="static/js/layoutscript.js"></script>
-<!--<script type="text/javascript">
-        $(document).ready(function () {
-            $('#sidebarCollapse').on('click', function () {
-                $('#sidebar').toggleClass('active');
-            });
-        });
-        $(function () {
-  $('#pop').popover({
-    placement:"bottom",
-    trigger:"hover"
-  })
-});
-    </script>-->
+{% block extra_scripts %}
+{% endblock %}
 </body>
 </html>
