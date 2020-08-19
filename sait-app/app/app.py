@@ -18,3 +18,7 @@ def welcome():
 @app.route('/prueba')
 def prueba():
     return render_template('prueba.html')
+
+@app.route('/servicios')
+def servicios():
+    return render_template('servicios.html')
