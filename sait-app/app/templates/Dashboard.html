@@ -1,0 +1,28 @@
+{% extends "layout.html" %} 
+
+{% block content %} 
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col" height: min-content;>#</th>
+      <th scope="col">ID</th>
+      <th scope="col">Inicio</th>
+      <th scope="col">Termino</th>
+      <th scope="col">Corte</th>
+      <th scope="col">Pago</th>
+      <th scope="col">Periodo</th>
+    </tr>
+  </thead>
+  <tbody>
+  	{% for action in actions%}
+  	<tr>
+      <th scope="row">1</th>
+      <td>{{ action.0 }}</td>
+      <td>{{ action.1}}</td>      
+    </tr>
+  	{% endfor%}    
+  </tbody>
+</table>
+{% endblock %}
+
+
