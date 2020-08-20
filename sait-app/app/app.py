@@ -5,7 +5,7 @@ app = Flask(__name__)
 app.config['MYSQL_HOST'] = 'localhost' 
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = ''
-app.config['MYSQL_DB'] = 'farmacia'
+app.config['MYSQL_DB'] = 'sait_db'
 mysql = MySQL(app)
 
 
@@ -24,14 +24,14 @@ def welcome():
 @app.route('/prueba')
 def prueba():
 	cur = mysql.connection.cursor()
-	cur.execute("INSERT INTO acciones (id,nombre,direccion) VALUES (%s,%s,%s)", (None, 'Test Action', 'Test Address'))
+	cur.execute("INSERT INTO activos (id,nombre,direccion) VALUES (%s,%s,%s)", (None, 'Test Action', 'Test Address'))
 	mysql.connection.commit()
 	return render_template('prueba.html')
 
 @app.route('/Dashboard')
 def Dashboard():
 	cur = mysql.connection.cursor()
-	cur.execute("SELECT * FROM acciones")
+	cur.execute("SELECT activos.nombre , periodo_pago.f_termino, periodo_pago.f_corte , periodo_pago.f_pago FROM (periodo_pago LEFT JOIN activos  ON periodo_pago.id = activos.id) ")
 	actions = cur.fetchall()
 	cur.close()	
 	print(actions)

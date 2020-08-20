@@ -5,9 +5,10 @@
   <thead>
     <tr>
       <th scope="col" height: min-content;>#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Vencio</th>
+      <th scope="col">Corte </th>
+      <th scope="col">Pago </th>
     </tr>
   </thead>
   <tbody>
@@ -15,7 +16,9 @@
     <tr>
       <th scope="row">1</th>
       <td>{{ action.0 }}</td>
-      <td>{{ action.1}}</td>      
+      <td>{{ action.1}}</td>  
+      <td>{{ action.2}}</td> 
+      <td>{{ action.3}}</td>  
     </tr>
     {% endfor%}    
   </tbody>
