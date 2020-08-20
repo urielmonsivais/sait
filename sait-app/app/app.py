@@ -23,7 +23,6 @@ def welcome():
 
 @app.route('/prueba')
 def prueba():
-<<<<<<< HEAD
 	cur = mysql.connection.cursor()
 	cur.execute("INSERT INTO acciones (id,nombre,direccion) VALUES (%s,%s,%s)", (None, 'Test Action', 'Test Address'))
 	mysql.connection.commit()
@@ -37,10 +36,7 @@ def Dashboard():
 	cur.close()	
 	print(actions)
 	return render_template('Dashboard.html', actions = actions)
-=======
-    return render_template('prueba.html')
 
 @app.route('/servicios')
 def servicios():
     return render_template('servicios.html')
->>>>>>> 6c33200b72a0725726567867c4a079f5195c4394

@@ -5,24 +5,19 @@
   <thead>
     <tr>
       <th scope="col" height: min-content;>#</th>
-      <th scope="col">ID</th>
-      <th scope="col">Inicio</th>
-      <th scope="col">Termino</th>
-      <th scope="col">Corte</th>
-      <th scope="col">Pago</th>
-      <th scope="col">Periodo</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Handle</th>
     </tr>
   </thead>
   <tbody>
-  	{% for action in actions%}
-  	<tr>
+    {% for action in actions%}
+    <tr>
       <th scope="row">1</th>
       <td>{{ action.0 }}</td>
       <td>{{ action.1}}</td>      
     </tr>
-  	{% endfor%}    
+    {% endfor%}    
   </tbody>
 </table>
 {% endblock %}
-
-
