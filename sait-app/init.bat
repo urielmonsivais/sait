@@ -1,3 +1,6 @@
 set FLASK_APP=app/app
 set FLASK_ENV=development
-flask run
+
+echo flask db init
+echo flask db migrate -m "Added company table."
+ flask run
