@@ -1,27 +1,22 @@
 from flask import Flask, render_template, request
 from flask_mail import Mail
 from flask_mail import Message
-# from flask_mysqldb import MySQL <---los demas equipos
-from flaskext.mysql import MySQL #este es de kiike 
+from app.config.DB import DB
+#from flask_mysqldb import MySQL #<---los demas equipos
+#from flaskext.mysql import MySQL #este es de kiike 
 
 app = Flask(__name__)
 app.config['MYSQL_HOST'] = 'localhost' 
 app.config['MYSQL_DATABASE_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = ''
 app.config['MYSQL_DB'] = 'farmacia'
-mysql = MySQL(app)
 
-app.config['MAIL_SERVER']='smtp.gmail.com'
-app.config['MAIL_PORT'] = 465
-app.config['MAIL_USERNAME'] = 'monsivaisuriel28@gmail.com'
-app.config['MAIL_PASSWORD'] = 'hpqgwjliswijqrwb'
-app.config['MAIL_USE_TLS'] = False
-app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
 
 
 @app.route('/')
 def index():
+    c = DB()
     return render_template('index.html')
 
 # para el mail
@@ -61,22 +56,22 @@ def welcome():
 
 @app.route('/prueba')
 def prueba():
-	cur = mysql.connection.cursor()
-	cur.execute("INSERT INTO activos (id,nombre,direccion) VALUES (%s,%s,%s)", (None, 'Test Action', 'Test Address'))
-	mysql.connection.commit()
+	#cur = mysql.connection.cursor()
+	#cur.execute("INSERT INTO activos (id,nombre,direccion) VALUES (%s,%s,%s)", (None, 'Test Action', 'Test Address'))
+	#mysql.connection.commit()
 	return render_template('prueba.html')
 
 @app.route('/Dashboard')
 def Dashboard():
 	# cur = mysql.connection.cursor()
 	# aqui empece
-	conn = mysql.connect()
-	cur=conn.cursor()
-	cur.execute("SELECT * FROM farmacia.acciones")
-	actions = cur.fetchall()
-	cur.close()	
-	print(actions)
-	return render_template('Dashboard.html', actions = actions)
+	# conn = mysql.connect()
+	# cur=conn.cursor()
+	# cur.execute("SELECT * FROM farmacia.acciones")
+	# actions = cur.fetchall()
+	# cur.close()	
+	#print(actions)    
+	return render_template('Dashboard.html', actions = [])
 
 @app.route('/servicios')
 def servicios():
