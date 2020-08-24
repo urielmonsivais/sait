@@ -1,0 +1,123 @@
+{% extends "layout.html" %} 
+
+{% block content %} 
+
+<button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#providerModal">
+    <i class="fa fa-plus"></i>
+    Nuevo Proveedor
+</button>
+<hr>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col" height: min-content;>#</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Telefono</th>
+      <th scope="col">RFC </th>
+      <th scope="col">Marca</th>      
+      <th scope="col">Opciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for provider in providers%}
+    <tr>      
+      <td>{{ provider.id }}</td>
+      <td>{{ provider.nombre}}</td>  
+      <td>{{ provider.telefono}}</td> 
+      <td>{{ provider.rfc}}</td>  
+      <td>{{ provider.marca}}</td>        
+      <td>          
+        <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#providerEModal{{loop.index}}">
+            <i class="fa fa-edit"></i>
+          </button>
+
+          <form action="{{ url_for('.removeprovider')}}" method="post">
+            <input type="hidden" name="proveedor_id" value="{{provider.id}}">
+            <button type="submit" class="btn btn-sm btn-danger">
+                <i class="fa fa-trash"></i>
+            </button>
+          </form>
+          
+      </td>
+    </tr>
+
+    <div class="modal fade" id="providerEModal{{loop.index}}" tabindex="-1" role="dialog" aria-labelledby="providerEModal{{loop.index}}" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="providerEModal{{loop.index}}">Actualizar Proveedor</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <form id="clients{{loop.index}}" name="clients{{loop.index}}" action="{{ url_for('.updateprovider') }}" method="POST">
+                    <input type="hidden" name="proveedor_id" value="{{provider.id}}">
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Nombre</label>
+                      <input value="{{provider.nombre}}" type="text" name="nombre" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Nombre">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Telefono</label>
+                        <input  value="{{ provider.telefono}}" type="text" name="telefono" class="form-control" id="phone" aria-describedby="emailHelp" placeholder="Telefono">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">RFC</label>
+                        <input type="text" max="18" value="{{provider.rfc}}" name="rfc" class="form-control" id="email" aria-describedby="emailHelp" placeholder="RFC">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">Marca</label>
+                      <input type="text" value="{{provider.marca}}" name="marca" class="form-control" id="password" placeholder="Marca...">
+                    </div>
+                  </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+              <button type="submit" form="clients{{loop.index}}" class="btn btn-primary">Actualizar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    {% endfor%}    
+  </tbody>
+</table>
+<!--  -->
+
+  <div class="modal fade" id="providerModal" tabindex="-1" role="dialog" aria-labelledby="providerModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="providerModal">Nuevo Proveedor</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form id="providers" name="providers" action="{{ url_for('.postprovider') }}" method="POST">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Nombre</label>
+                  <input type="text" name="nombre" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Nombre">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Telefono</label>
+                    <input type="text" name="telefono" class="form-control" id="phone" aria-describedby="emailHelp" placeholder="Telefono">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">RFC</label>
+                    <input type="text" name="rfc" class="form-control" id="email" aria-describedby="emailHelp" placeholder="RFC...">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Marca</label>
+                  <input type="text" name="marca" class="form-control" id="password" placeholder="Marca...">
+                </div>              
+              </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="submit" form="providers" class="btn btn-primary">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

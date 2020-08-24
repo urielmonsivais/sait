@@ -7,7 +7,9 @@ load_dotenv()
 class DB():
     connection = None
     def __init__(self):
-        super().__init__()
+        super().__init__()        
+
+    def open(self):
         try:
             self.connection = mysql.connector.connect(host=os.getenv('DB_HOST'),
                                                   database=os.getenv('DB_NAME'),
@@ -16,7 +18,12 @@ class DB():
         except expression as Error:
             print("Connection error")
         print("Successfully Connection")
-        print(self.connection.get_server_info())
 
 
+    def get_connection(self):
+        return self.connection
 
+    def close(self):
+        if self.connection.is_connected():
+            self.connection.close()
+            print("MySQL connection is closed")

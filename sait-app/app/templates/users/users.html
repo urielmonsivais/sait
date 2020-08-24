@@ -1,0 +1,223 @@
+{% extends "layout.html" %} 
+
+{% block content %} 
+
+<button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#userModal">
+    <i class="fa fa-plus"></i>
+    Nuevo Usuario
+</button>
+<hr>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col" height: min-content;>#</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Telefono</th>
+      <th scope="col">Correo </th>
+      <th scope="col">Sucursal</th>
+      <th scope="col">Rol</th>
+      <th scope="col">Opciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for user in users%}
+    <tr>      
+      <td>{{ user.id }}</td>
+      <td>{{ user.name}}</td>  
+      <td>{{ user.phone}}</td> 
+      <td>{{ user.email}}</td>  
+      <td>{{ user.branch_name}}</td>  
+      <td>{{ user.rol_name}}</td> 
+      <td>
+          
+        <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#userEModal{{loop.index}}">
+            <i class="fa fa-edit"></i>
+          </button>
+
+          <form action="{{ url_for('.removeuser')}}" method="post">
+            <input type="hidden" name="user_id" value="{{user.id}}">
+            <button type="submit" class="btn btn-sm btn-danger">
+                <i class="fa fa-trash"></i>
+            </button>
+          </form>
+          
+      </td>
+    </tr>
+
+    <div class="modal fade" id="userEModal{{loop.index}}" tabindex="-1" role="dialog" aria-labelledby="userEModal{{loop.index}}" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="userEModal{{loop.index}}">Actualizar Usuario</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <form id="clients{{loop.index}}" name="clients{{loop.index}}" action="{{ url_for('.updateuser') }}" method="POST">
+                    <input type="hidden" name="user_id" value="{{user.id}}">
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Nombre</label>
+                      <input value="{{user.name}}" type="text" name="name" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Nombre">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Telefono</label>
+                        <input  value="{{ user.phone}}" type="text" name="phone" class="form-control" id="phone" aria-describedby="emailHelp" placeholder="Telefono">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Correo</label>
+                        <input type="email" value="{{user.email}}" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">Contraseña</label>
+                      <input type="password" value="{{user.password}}" name="password" class="form-control" id="password" placeholder="Contraseña...">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Sucursal</label>
+                        <input value="{{user.branch_name}}" readonly disabled type="text" name="branch_office" class="form-control" id="branch" aria-describedby="emailHelp" placeholder="Sucursal">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Rol</label>
+                        <select name="rol" id="rol" class="form-control">
+
+                            {% if user.rol == 0 %}
+                            <option selected value="0">SAIT ADMIN</option>
+                            <option value="1">CLIENTE ADMIN</option>
+                            <option value="2">CLIENTE ESTANDAR</option>                                    
+                            {% endif %}
+
+                            {% if user.rol == 1 %}
+                            <option value="0">SAIT ADMIN</option>
+                            <option selected  value="1">CLIENTE ADMIN</option>
+                            <option value="2">CLIENTE ESTANDAR</option>                                    
+                            {% endif %}
+
+                            {% if user.rol == 2 %}
+                            <option  value="0">SAIT ADMIN</option>
+                            <option value="1">CLIENTE ADMIN</option>
+                            <option selected  value="2">CLIENTE ESTANDAR</option>                                    
+                            {% endif %}
+
+                            
+                        </select>
+                    </div>                
+                  </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+              <button type="submit" form="clients{{loop.index}}" class="btn btn-primary">Actualizar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    {% endfor%}    
+  </tbody>
+</table>
+<!--  -->
+
+  <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="userModal">Nuevo Usuario</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form id="clients" name="clients" action="{{ url_for('.users') }}" method="POST">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Nombre</label>
+                  <input type="text" name="name" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Nombre">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Telefono</label>
+                    <input type="text" name="phone" class="form-control" id="phone" aria-describedby="emailHelp" placeholder="Telefono">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Correo</label>
+                    <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Email">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Contraseña</label>
+                  <input type="password" name="password" class="form-control" id="password" placeholder="Contraseña...">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Sucursal</label>
+                    <input type="text" name="branch_office" class="form-control" id="branch" aria-describedby="emailHelp" placeholder="Sucursal">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Rol</label>
+                    <select name="rol" id="rol" class="form-control">
+                        <option value="0">SAIT ADMIN</option>
+                        <option value="1">CLIENTE ADMIN</option>
+                        <option value="2">CLIENTE ESTANDAR</option>
+                    </select>
+                </div>                
+              </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="submit" form="clients" class="btn btn-primary">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<div class="modal fade" id="userEModal" tabindex="-1" role="dialog" aria-labelledby="userEModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="userEModal">Actualizar Usuario</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form id="clients" name="clients" action="{{ url_for('.users') }}" method="POST">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Nombre</label>
+                  <input type="text" name="name" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Nombre">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Telefono</label>
+                    <input type="text" name="phone" class="form-control" id="phone" aria-describedby="emailHelp" placeholder="Telefono">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Correo</label>
+                    <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Email">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Contraseña</label>
+                  <input type="password" name="password" class="form-control" id="password" placeholder="Contraseña...">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Sucursal</label>
+                    <input readonly disabled type="text" name="branch_office" class="form-control" id="branch" aria-describedby="emailHelp" placeholder="Sucursal">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Rol</label>
+                    <select name="rol" id="rol" class="form-control">
+                        <option value="0">SAIT ADMIN</option>
+                        <option value="1">CLIENTE ADMIN</option>
+                        <option value="2">CLIENTE ESTANDAR</option>
+                    </select>
+                </div>                
+              </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="submit" form="clients" class="btn btn-primary">Actualizar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+      function update(data) {
+          
+      }
+  </script>
+{% endblock %}

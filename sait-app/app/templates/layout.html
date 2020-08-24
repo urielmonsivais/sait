@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css"
           integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/sidebar.css') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" crossorigin="anonymous">
     <title>SAIT</title>
 </head>
 <body>
@@ -17,30 +18,43 @@
         <div class="sidebar-header">
             <img src="static/img/user.png" alt="not faund" style="width: 150px; height: 150px; display:block;margin:auto; border-radius: 150px ">
             <div>
-                <h3>Usuario no.1</h3>
+                <h3>{{ currentUser[1]}}</h3>
             </div>
         </div>
 
         <ul class="list-unstyled components">
             <p>Panel de control</p>
-            
+            <li>
+                <a href="/dashboard">Dashboard</a>
+
+            </li>
             <li>
                 <a href="#">Home</a>
             </li>
             <li>
-                <a href="/Dashboard">Dashboard</a>
-
+                <a href="/users">
+                    <i class="fa fa-users" aria-hidden="true"></i>
+                    Usuarios
+                </a>
+            </li>            
+            <li>
+                <a href="/providers">
+                    <i class="fa fa-archive" aria-hidden="true"></i>
+                    Proveedores</a>
             </li>
             <li>
-                <a href="/servicios">Servicios</a>
+                <a href="/services">
+                    <i class="fa fa-server" aria-hidden="true"></i>
+                    Servicios</a>
             </li>
+            
             <li>
-                <a href="#">Activos</a>
+                <a href="/softwares">
+                    <i class="fa fa-random" aria-hidden="true"></i>
+                    Software
+                </a>
             </li>
-            <li>
-                <a href="#">Software</a>
-            </li>
-            <li>
+            <!-- <li>
                 <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
                 <ul class="collapse list-unstyled" id="pageSubmenu">
                     <li>
@@ -53,7 +67,7 @@
                         <a href="#">Page 3</a>
                     </li>
                 </ul>
-            </li>
+            </li> -->
         </ul>
 
     </nav>
@@ -69,7 +83,7 @@
 
                 <strong class="titulo">Empresa cliente</strong>
 
-                <a id="logout" tabindex="0" data-toggle="popover" data-trigger="focus" data-content="Cerrar sesion" class="navbar-brand mr-sm-2 d-none d-md-block" href="#">
+                <a id="logout" tabindex="0" data-toggle="popover" data-trigger="focus" data-content="Cerrar sesion" class="navbar-brand mr-sm-2 d-none d-md-block" href="{{ url_for('.logout')}}">
                     <img src="static/img/out.png" style="width: 25px; height: 25px;" alt="Log out" id="ico">
                 </a>
             </div>

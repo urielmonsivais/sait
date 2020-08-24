@@ -1,0 +1,181 @@
+{% extends "layout.html" %} 
+
+{% block content %} 
+
+
+
+<button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target=".softwareModal">
+    <i class="fa fa-plus"></i>
+    Agregar Software
+</button>
+<hr>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col" height: min-content;>#</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Version</th>
+      <th scope="col">Vigencia</th>
+      <th scope="col">Fecha de Compra</th>
+      <th scope="col">Tipo</th>
+      <th scope="col">Proveedor</th>
+      <th scope="col">Opciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for software in softwares%}
+    <tr>      
+      <td>{{ software.id }}</td>
+      <td>{{ software.nombre}}</td>  
+      <td>{{ software.version}}</td> 
+      <td>{{ software.vigencia}}</td>  
+      <td>{{ software.f_compra}}</td>  
+      <td>{{ software.type_name}}</td> 
+      <td>{{ software.provider_name}}</td> 
+      <td>          
+      <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target=".view-software{{loop.index}}">
+            <i class="fa fa-eye"></i>
+          </button>
+
+        <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#userEModal{{loop.index}}">
+            <i class="fa fa-edit"></i>
+          </button>
+
+          <form action="{{ url_for('.removesoftware')}}" method="post">
+            <input type="hidden" name="software_id" value="{{software.id}}">
+            <button type="submit" class="btn btn-sm btn-danger">
+                <i class="fa fa-trash"></i>
+            </button>
+          </form>
+          
+      </td>
+
+      
+    </tr>
+
+
+    
+
+    {% endfor%}    
+  </tbody>
+</table>
+<!--  -->
+
+
+  <div class="modal fade softwareModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+     
+      <div class="modal-header">
+        <h5 class="modal-title" id="softwareModal">Agregar software</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+              <div class="modal-body">
+             <form id="softwaresf" name="softwaresf" action="{{ url_for('.postsoftware') }}" method="POST">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-12 col-sm-4">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Nombre</label>
+                        <input type="text" name="nombre" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Nombre">
+                      </div>
+                    </div>
+                    <div class="col-12 col-sm-4">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Vigencia</label>
+                        <input type="date" name="vigencia" class="form-control" id="phone" aria-describedby="emailHelp" placeholder="Telefono">
+                      </div>
+                    </div>
+                    <div class="col-12 col-sm-4">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Versión</label>
+                        <input type="number" name="version" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Version">
+                    </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12 col-sm-4">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Fecha de Compra</label>
+                        <input type="date" name="f_compra" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Fecha compra">
+                      </div>
+                    </div>
+                    <div class="col-12 col-sm-4">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Tipo</label>
+                        <select name="tipo" id="tipo" class="form-control">
+                          {% for type in types%}
+                            <option value="{{ type.id }}">{{ type.nombre }}</option>
+                          {% endfor%}                          
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-12 col-sm-4">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Proveedor</label>
+                        <select name="proveedor" id="proveedor" class="form-control">
+                          {% for provider in providers%}
+                            <option value="{{ provider.id }}">{{ provider.nombre }}</option>
+                          {% endfor%}                          
+                        </select>
+                    </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12">
+                      <hr>
+                      <h4 class="text">
+                        Periodos de pago
+                      </h4>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12 col-sm-4">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Fecha inicio</label>
+                        <input type="date" name="f_inicio" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Nombre">
+                      </div>
+                    </div>
+                    <div class="col-12 col-sm-4">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Fecha termino</label>
+                        <input type="date" name="f_termino" class="form-control" id="phone" aria-describedby="emailHelp" placeholder="Telefono">
+                      </div>
+                    </div>
+                    <div class="col-12 col-sm-4">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Fecha de corte</label>
+                        <input type="date" name="f_corte" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Email">
+                    </div>
+                    </div>
+                    <div class="col-12 col-sm-4">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Fecha de pago</label>
+                        <input type="date" name="f_pago" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Email">
+                    </div>
+                    </div>
+                    <div class="col-12 col-sm-4">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Periodo</label>
+                        <input type="number" name="periodo" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Meses">
+                    </div>
+                    </div>
+                  </div>
+
+                </div>                                     
+              </form>
+        </div>
+              <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="submit" form="softwaresf" class="btn btn-primary">Guardar</button>
+        </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+{% endblock %}
