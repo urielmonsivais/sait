@@ -1,13 +1,14 @@
 from app.core.Model import Model
 from app.models.Software import Software
 from app.models.Service import Service
+from app.models.Activo import Activo
 from app.models.Provider import Provider
 from app.models.Type import Type
 from mysql.connector import Error
 from enum import Enum
 
 
-class Services(Model):
+class Activos(Model):
     cursor = None
 
     def __init__(self, db):

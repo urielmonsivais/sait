@@ -174,8 +174,7 @@ def softwares():
 
 @app.route('/software', methods=['POST'])
 def postsoftware():
-    req = request.form
-    print(req)
+    req = request.form    
     softwares = Softwares(cDb)
     softwares.add(req)
     del softwares
@@ -201,7 +200,7 @@ def removesoftware():
 @app.route('/services')
 def services():
     s = Services(cDb)
-    return render_template('services/services.html',services=s.getAll(),currentUser=session['current_user'])
+    return render_template('services/services.html',providers=s.getProviders(),services=s.getAll(),currentUser=session['current_user'])
 
 @app.route('/services', methods=['POST'])
 def postservice():

@@ -15,3 +15,10 @@ class Software():
 
         self.type_name = data[9]
         self.provider_name = data[10]
+
+        #relation ship with payment periods
+        self.f_inicio = data[12]
+        self.f_termino = data[13]
+        self.f_corte = data[14]
+        self.f_pago = data[15]
+        self.periodo = data[16]

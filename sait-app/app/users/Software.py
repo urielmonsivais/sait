@@ -17,7 +17,7 @@ class Softwares(Model):
 
     def add(self, soft_data):
         try:
-            result = self.cursor.execute("INSERT INTO periodo_pago (id, f_inicio, f_termino, f_corte, periodo) values (%s, %s, %s, %s, %s)",(None, soft_data['f_inicio'], soft_data['f_termino'], soft_data['f_corte'], soft_data['periodo']))
+            result = self.cursor.execute("INSERT INTO periodo_pago (id, f_inicio, f_termino, f_corte, f_pago, periodo) values (%s, %s, %s, %s, %s, %s)",(None, soft_data['f_inicio'], soft_data['f_termino'], soft_data['f_corte'],soft_data['f_pago'], soft_data['periodo']))
             self.db.get_connection().commit()
             periodo_id = self.cursor.lastrowid
             print(periodo_id)
@@ -43,9 +43,17 @@ class Softwares(Model):
 
     def update(self, sw):
         try:
+
+            print('data to update')
+            print(sw)
+            r = self.cursor.execute(
+                "UPDATE periodo_pago SET f_inicio=%s, f_termino=%s, f_corte=%s, f_pago=%s, periodo=%s WHERE id = %s",
+                (sw['f_inicio'],sw['f_termino'],sw['f_corte'],sw['f_pago'],sw['periodo'],sw['pago'])
+            )
+            self.db.get_connection().commit()
             result = self.cursor.execute(
-                "UPDATE software SET nombre=%s, version=%s, vigencia=%s, f_compra=%s, tipo=%s, pago=%s,  proveedor=%s WHERE id = %s",
-                (sw['nombre'], sw['version'], sw['vigencia'], sw['compra'], sw['tipo'], sw['pago'], sw['proveedor'], sw['id']))
+                "UPDATE software SET nombre=%s, version=%s, vigencia=%s, f_compra=%s, tipo=%s,  proveedor=%s WHERE id = %s",
+                (sw['nombre'], sw['version'], sw['vigencia'], sw['f_compra'], sw['tipo'], sw['proveedor'], sw['software_id']))
             self.db.get_connection().commit()
         except Error as e:
             print("Error reading data from MySQL table", e)
@@ -74,7 +82,7 @@ class Softwares(Model):
 
     def getAll(self):
         try:
-            self.cursor.execute("SELECT s.*, t.nombre, p.nombre FROM software AS s INNER JOIN tipo_sw AS t ON  s.tipo = t.id INNER JOIN proveedor AS p ON s.proveedor=p.id WHERE s.status>=1")
+            self.cursor.execute("SELECT s.*, t.nombre, p.nombre,pp.* FROM software AS s INNER JOIN tipo_sw AS t ON  s.tipo = t.id INNER JOIN proveedor AS p ON s.proveedor=p.id inner JOIN periodo_pago as pp ON s.pago=pp.id WHERE s.status>=1")
             records = self.cursor.fetchall()            
             return [Software(x) for x in records]
         except Error as e:
