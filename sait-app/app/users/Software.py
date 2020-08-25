@@ -2,9 +2,11 @@ from app.core.Model import Model
 from app.models.Software import Software
 from app.models.Provider import Provider
 from app.models.Type import Type
+from app.models.Pending import Pending
 from mysql.connector import Error
 from enum import Enum
-
+import datetime
+#from datetime import date
 
 class Softwares(Model):
     cursor = None
@@ -90,6 +92,20 @@ class Softwares(Model):
         finally:
             pass#self.db.close()
 
+    def get_notifications(self):
+        try:                   
+            date_original = datetime.datetime.now()            
+            days_to_add = 15
+            date_new = date_original + datetime.timedelta(days_to_add)
+            f1 = date_original
+            f2 = date_new
+            print("\n Original Date: ", date_original, "\n")
+            print("\n New Date: ", date_new, "\n")
+            self.cursor.execute("""SELECT * FROM software as s inner JOIN periodo_pago as pp ON s.pago = pp.id WHERE PP.f_pago BETWEEN '{0}' AND '{1}' """.format(f1,f2))
+            records = self.cursor.fetchall()
+            return [Pending(x) for x in records]
+        except Error as e:
+            pass
     def __del__(self):
         try:
             self.db.close()

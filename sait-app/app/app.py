@@ -26,6 +26,9 @@ mail = Mail(app)
 auth = Auth(session, g, cDb)
 skip_routes = ['signin','index','login']
 
+
+
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -95,8 +98,11 @@ def welcome():
 
 
 @app.route('/dashboard')
-def dashboard():    
-    return render_template('Dashboard.html', actions=[],currentUser=session['current_user'])
+def dashboard():
+    software = Softwares(cDb)
+    pendings = software.get_notifications()
+    print(pendings)
+    return render_template('Dashboard.html', pendings=pendings,actions=[],currentUser=session['current_user'])
 
 
 @app.route('/servicios')
@@ -169,7 +175,6 @@ def removeprovider():
 def softwares():
     print(cDb)
     softwares = Softwares(cDb)
-
     return render_template('software/software.html', softwares=softwares.getAll(), types=softwares.getTypes(), providers=softwares.getProviders(), currentUser=session['current_user'])
 
 @app.route('/software', methods=['POST'])
