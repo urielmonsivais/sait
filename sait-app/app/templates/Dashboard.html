@@ -1,24 +1,171 @@
 {% extends "layout.html" %} 
 
 {% block content %} 
+
+<div class="row">
+  <!-- scroll -->
+  <div class="col-3 overflow-auto shadow p-3 mb-5 bg-white" style="height: 100vh;border-radius: 15px;">
+      <div class="">
+          <div id="list-tab" role="tablist" class="list-group list-group-flush">
+              <a class="list-group-item list-group-item-action dropdown-toggle" id="list-profile-list" data-toggle="collapse" href="#listex" role="tab" aria-controls="profile" aria-selected="false" aria-expanded="false">Internet</a>
+              <ul class="collapse list-unstyled" id="listex">
+                  <li>
+                      <button type="button" class="list-group-item list-group-item-action">
+                          <img src="static/img/bc.png" alt="img not found" style="height: 50px; width: 100px; margin-right: 10px">
+                          Cras justo odio
+                      </button>
+                  </li>
+                  <li>
+                      <button type="button" class="list-group-item list-group-item-action">
+                          <img src="static/img/bc.png" alt="img not found" style="height: 50px; width: 100px; margin-right: 10px">
+                          Dapibus ac facilisis in
+                      </button>
+                  </li>
+                  <li>
+                      <button type="button" class="list-group-item list-group-item-action">
+                          <img src="static/img/bc.png" alt="img not found" style="height: 50px; width: 100px; margin-right: 10px">
+                          Morbi leo risus
+                      </button>
+                  </li>
+              </ul>
+              <a class="list-group-item list-group-item-action dropdown-toggle" id="list-profile-list" data-toggle="collapse" href="#listex1" role="tab" aria-controls="profile" aria-selected="false" aria-expanded="false">Telefonia</a>
+              <ul class="collapse list-unstyled" id="listex1">
+                  <li>
+                      <button type="button" class="list-group-item list-group-item-action">
+                          <img src="static/img/bc.png" alt="img not found" style="height: 50px; width: 100px; margin-right: 10px">
+                          Cras justo odio
+                      </button>
+                  </li>
+                  <li>
+                      <button type="button" class="list-group-item list-group-item-action">
+                          <img src="static/img/bc.png" alt="img not found" style="height: 50px; width: 100px; margin-right: 10px">
+                          Dapibus ac facilisis in
+                      </button>
+                  </li>
+                  <li>
+                      <button type="button" class="list-group-item list-group-item-action">
+                          <img src="static/img/bc.png" alt="img not found" style="height: 50px; width: 100px; margin-right: 10px">
+                          Morbi leo risus
+                      </button>
+                  </li>
+              </ul>
+              <a class="list-group-item list-group-item-action dropdown-toggle" id="list-profile-list" data-toggle="collapse" href="#listex2" role="tab" aria-controls="profile" aria-selected="false" aria-expanded="false">red celular</a>
+              <ul class="collapse list-unstyled" id="listex2">
+                  <li>
+                      <button type="button" class="list-group-item list-group-item-action">
+                          <img src="static/img/bc.png" alt="img not found" style="height: 50px; width: 100px; margin-right: 10px">
+                          Cras justo odio
+                      </button>
+                  </li>
+                  <li>
+                      <button type="button" class="list-group-item list-group-item-action">
+                          <img src="static/img/bc.png" alt="img not found" style="height: 50px; width: 100px; margin-right: 10px">
+                          Dapibus ac facilisis in
+                      </button>
+                  </li>
+                  <li>
+                      <button type="button" class="list-group-item list-group-item-action">
+                          <img src="static/img/bc.png" alt="img not found" style="height: 50px; width: 100px; margin-right: 10px">
+                          Morbi leo risus
+                      </button>
+                  </li>
+              </ul>
+          </div>
+      </div>
+  </div>
+  <!-- pestañas -->
+  <div class="col-9">
+      <ul class="nav nav-tabs" id="myTab" role="tablist" style="background-color: white;border-top-right-radius: 15px;">
+          <li class="nav-item" role="presentation">
+              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Info</a>
+          </li>
+          <li class="nav-item" role="presentation">
+              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Facturas</a>
+          </li>
+          <li class="nav-item" role="presentation">
+              <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contacto</a>
+          </li>
+      </ul>
+      <!-- contenido de pestañas -->
+      <div class="tab-content" id="myTabContent" style="background-color: rgba(255,255,255,0.6);height: 100vh;border-radius: 0 0 15px 15px;padding-top: 20px;padding-left: 30px;padding-right: 30px;">
+          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <div class="row">
+              <div id="imgprov" class="column float-left">
+              <img src="static/img/bc.png" alt="image not found" style="height: 150px;width: 250px;">
+              <h3>nombre proveedor</h3>
+            </div>
+              <div class="float-right column" style="text-align: right;">
+                <sup>gasto mensual:</sup>
+                <h1 style="color: green; font-size: 75px;">$1500.00</h1>
+              </div>
+            </div>
+             
+              <div class="row">
+                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas id semper est. Nullam interdum arcu nulla, a faucibus arcu aliquet id. Nam sollicitudin ligula et tortor pulvinar accumsan. Pellentesque sit amet odio quis diam molestie accumsan nec id mi. Nunc ac augue pellentesque, rutrum velit at, pulvinar quam. Fusce nec magna libero. Aliquam posuere, velit ac lacinia lacinia, risus libero mattis nibh, et dignissim nulla nulla vitae dui. Aenean justo mauris, accumsan vel pharetra eu, iaculis sed purus.
+
+Pellentesque auctor faucibus sapien quis placerat. Curabitur pretium leo nec eleifend lobortis. Aliquam nec condimentum elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mauris justo, euismod nec orci vel, placerat egestas arcu. Sed blandit efficitur rhoncus. Cras fringilla, sapien a finibus euismod, nibh ex efficitur neque, nec ornare orci purus ultrices mi. Suspendisse non scelerisque lacus. Aenean vel nisi blandit, convallis nisl in, gravida dui. 
+              </div>
+          </div>
+          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <div class="row row-cols-1 row-cols-md-2">
+<div class="col mb-4">
+  <div class="card">
+    <img src="..." class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+    </div>
+  </div>
+</div>
+<div class="col mb-4">
+  <div class="card">
+    <img src="..." class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+    </div>
+  </div>
+</div>
+<div class="col mb-4">
+  <div class="card">
+    <img src="..." class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
+    </div>
+  </div>
+</div>
+<div class="col mb-4">
+  <div class="card">
+    <img src="..." class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+    </div>
+  </div>
+</div>
+</div>
+          </div>
+          <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">info del contacto</div>
+      </div>
+  </div>
+</div>
+<hr>
 <table class="table table-striped">
   <thead>
     <tr>
-      <th scope="col" height: min-content;>#</th>
-      <th scope="col">Nombre</th>
-      <th scope="col">Vencio</th>
-      <th scope="col">Corte </th>
+      
+      <th scope="col">Nombre</th>      
       <th scope="col">Pago </th>
     </tr>
   </thead>
   <tbody>
-    {% for action in actions%}
+    {% for p in pendings%}
     <tr>
-      <th scope="row">1</th>
-      <td>{{ action.0 }}</td>
-      <td>{{ action.1}}</td>  
-      <td>{{ action.2}}</td> 
-      <td>{{ action.3}}</td>  
+      
+      <td>{{ p.nombre }}</td>
+      <td>{{ p.f_pago}}</td>  
+       
     </tr>
     {% endfor%}    
   </tbody>
