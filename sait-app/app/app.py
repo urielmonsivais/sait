@@ -9,6 +9,7 @@ from app.users.Users import Users
 from app.users.Providers import Providers
 from app.users.Services import Services
 from app.users.Software import Softwares
+#from app.users.Activos import activos
 import os
 load_dotenv()
 
@@ -24,7 +25,7 @@ app.secret_key = os.getenv('SECRET_KEY')
 cDb = DB()
 mail = Mail(app)
 auth = Auth(session, g, cDb)
-skip_routes = ['signin','index','login']
+skip_routes = ['signin','index','login','contact','static']
 
 @app.route('/')
 def index():
@@ -46,7 +47,7 @@ def before_request():
 def contact():
     request_c = request.form
     try:
-        msg = Message("New request",
+        msg = Message("Nueva Solicitud",
                       sender="monsivaisuriel28@gmail.com",
                       recipients=["uriel.monsivais@sait.red", "enrique.espinoza@sait.red"])
         mailBody = """ 
@@ -225,3 +226,10 @@ def removeservice():
     s.remove(req)
     del s
     return redirect(url_for('services'))
+
+@app.route('/activos')
+def activos():
+    s = Services(cDb)
+    ac = s.getActivos()
+    print(ac)
+    return render_template('activos/activos.html', activos=ac,actions=[],currentUser=session['current_user'])

@@ -1,0 +1,26 @@
+{% extends "layout.html" %} 
+
+{% block content %} 
+<table class="table table-striped">
+  <thead>
+    <tr>      
+      <th scope="col">id</th>
+      <th scope="col">nombre</th>
+      <th scope="col">Caracteristica </th>
+      <th scope="col">Marca </th>
+      <th scope="col">Modelo </th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for ac in activos%}
+    <tr>
+      <th scope="row">{{ ac[0] }}</th>
+      <td>{{ ac[1] }}</td>
+      <td>{{ ac[2] }}</td>  
+      <td>{{ ac[3] }}</td> 
+      <td>{{ ac[4] }}</td>  
+    </tr>
+    {% endfor%}    
+  </tbody>
+</table>
+{% endblock %}

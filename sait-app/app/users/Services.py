@@ -87,6 +87,16 @@ class Services(Model):
             print("Error reading data from MySQL table", e)
         finally:
             pass#self.db.close()
+    
+    def getActivos(self):
+        try:
+            self.cursor.execute("SELECT s.*, p.nombre, pp.* FROM activos AS s INNER JOIN proveedor AS p ON s.proveedor=p.id inner JOIN periodo_pago as pp ON s.pago=pp.id WHERE s.status>=1")
+            records = self.cursor.fetchall()
+            return [x for x in records]
+        except Error as e:
+            print("Error reading data from MySQL table", e)
+        finally:
+            pass#self.db.close()
 
     def __del__(self):
         try:
