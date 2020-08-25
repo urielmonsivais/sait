@@ -1,3 +1,4 @@
+
 class Pending():
     def __init__(self,d):
         self.id = d[0]
@@ -8,5 +9,7 @@ class Pending():
         self.tipo = d[5]
         self.pago = d[6]
         
+        self.f_inicio = d[10]
+        self.f_termino = d[11]
         self.f_pago = d[13]
     
