@@ -47,6 +47,105 @@
 
 
 
+
+
+<!-- actualizar servicio -->
+<div class="modal fade updateSoftware" id="updateSoftware{{loop.index}}" tabindex="-1" role="dialog"
+            aria-labelledby="updateSoftware{{loop.index}}" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="updateSoftware{{loop.index}}">Actualizar</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="software_Edit" name="software_Edit" action="{{ url_for('.updateservice') }}"
+                            method="POST">
+                            <div class="container">
+                              <div class="row">
+                                <div class="col-12 col-sm-6">
+                                  <div class="form-group">
+                                    <label for="exampleInputEmail1">Nombre</label>
+                                    <input type="text" name="nombre" value="{{ service.nombre }}" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Nombre">
+                                  </div>
+                                </div>                   
+                                <div class="col-12 col-sm-6">
+                                  <div class="form-group">
+                                    <label for="exampleInputEmail1">Proveedor</label>
+                                    <select name="proveedor" id="proveedor" class="form-control">
+                                      {% for provider in providers%}
+                                        <option value="{{ provider.id }}">{{ provider.nombre }}</option>
+                                      {% endfor%}                          
+                                    </select>
+                                </div>
+                                </div>
+                                <div class="col-12">
+                                  <div class="form-group">
+                                    <label for="exampleInputEmail1">Caracteristicas</label>
+                                    <textarea class="form-control" name="caracteristicas" id="caracteristicas" placeholder="Descripción" cols="30" rows="5">{{service.caracteristicas}}</textarea>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-12">
+                                  <hr>
+                                  <h4 class="text">
+                                    Periodos de pago
+                                  </h4>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-12 col-sm-4">
+                                  <div class="form-group">
+                                    <label for="exampleInputEmail1">Fecha inicio</label>
+                                    <input type="date" name="f_inicio" class="form-control" id="name" aria-describedby="emailHelp" value="{{service.f_inicio}}" placeholder="Nombre">
+                                  </div>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                  <div class="form-group">
+                                    <label for="exampleInputEmail1">Fecha termino</label>
+                                    <input type="date" name="f_termino" class="form-control" id="phone" aria-describedby="emailHelp" placeholder="Telefono" value="{{service.f_termino}}">
+                                  </div>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                  <div class="form-group">
+                                    <label for="exampleInputEmail1">Fecha de corte</label>
+                                    <input type="date" name="f_corte" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Email" value="{{service.f_corte}}">
+                                </div>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                  <div class="form-group">
+                                    <label for="exampleInputEmail1">Fecha de pago</label>
+                                    <input type="date" name="f_pago" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Email" value="{{service.f_pago}}">
+                                </div>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                  <div class="form-group">
+                                    <label for="exampleInputEmail1">Periodo</label>
+                                    <input type="number" name="periodo" class="form-control" id="email" aria-describedby="emailHelp" value="{{service.periodo}}" placeholder="Meses"  >
+                                </div>
+                                </div>
+                              </div>
+            
+                            </div>  
+
+
+                          </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <button type="submit" form="software_Edit" class="btn btn-primary">Guardar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+<!-- fin actualizar -->
+
+
 <!-- ver detalle -->
 <div class="modal fade viewSoftware" id="viewSoftware{{loop.index}}" tabindex="-1" role="dialog" aria-labelledby="viewSoftware{{loop.index}}" aria-hidden="true">
   <div class="modal-dialog modal-lg">
@@ -144,8 +243,6 @@
   </div>
 </div>
 <!-- fin ver detalle -->
-    
-
     {% endfor%}    
   </tbody>
 </table>
