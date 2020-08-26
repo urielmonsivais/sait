@@ -46,6 +46,106 @@
     </tr>
 
 
+
+<!-- ver detalle -->
+<div class="modal fade viewSoftware" id="viewSoftware{{loop.index}}" tabindex="-1" role="dialog" aria-labelledby="viewSoftware{{loop.index}}" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+     
+      <div class="modal-header">
+        <h5 class="modal-title" id="viewSoftware{{loop.index}}">Detalles de Servicio</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+              <div class="modal-body">
+             <form >                
+                <div class="container">
+                  <div class="row">
+                    <div class="col-12 col-sm-4">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Nombre</label>
+                        <input readonly value="{{ service.nombre }}" type="text" name="nombre" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Nombre">
+                      </div>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Proveedor</label>
+                        <select name="proveedor" id="proveedor" disabled class="form-control">
+                          {% for provider in providers%}
+                          {% if service.proveedor == provider.id %}
+                          <option selected value="{{ provider.id }}">{{ provider.nombre }}</option>
+                          {% endif %}
+                       
+                       {% if service.proveedor != provider.id %}
+                          <option   value="{{ provider.id }}">{{ provider.nombre }}</option>                                                             
+                       {% endif %}
+                          {% endfor%}                          
+                        </select>
+                    </div>
+                    </div>
+                    <div class="col-12">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Caracteristicas</label>
+                        <textarea class="form-control" disabled name="caracteristicas" id="caracteristicas"  cols="30" rows="5">{{service.caracteristicas}}</textarea>
+                      </div>
+                    </div>
+                    <!-- aqui voy -->
+                  </div>
+                  <div class="row">
+                    <div class="col-12">
+                      <hr>
+                      <h4 class="text">
+                        Periodos de pago
+                      </h4>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12 col-sm-4">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Fecha inicio</label>
+                        <input type="date" name="f_inicio" class="form-control" readonly id="name" aria-describedby="emailHelp" value="{{service.f_inicio}}" placeholder="Nombre">
+                      </div>
+                    </div>
+                    <div class="col-12 col-sm-4">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Fecha termino</label>
+                        <input type="date" name="f_termino" class="form-control" readonly id="phone" aria-describedby="emailHelp" value="{{service.f_termino}}" placeholder="Telefono">
+                      </div>
+                    </div>
+                    <div class="col-12 col-sm-4">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Fecha de corte</label>
+                        <input type="date" name="f_corte" class="form-control" id="email" readonly aria-describedby="emailHelp" value="{{service.f_corte}}" placeholder="Email">
+                    </div>
+                    </div>
+                    <div class="col-12 col-sm-4">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Fecha de pago</label>
+                        <input type="date" name="f_pago" class="form-control" id="email" readonly aria-describedby="emailHelp" value="{{service.f_pago}}" placeholder="Email">
+                    </div>
+                    </div>
+                    <div class="col-12 col-sm-4">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Periodo</label>
+                        <input type="number" name="periodo" class="form-control" id="email" readonly aria-describedby="emailHelp" value="{{service.periodo}}" placeholder="Meses">
+                    </div>
+                    </div>
+                  </div>
+                  
+
+                </div>                                     
+              </form>
+        </div>
+              <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>          
+        </div>
+    </div>
+  </div>
+</div>
+<!-- fin ver detalle -->
+    
+
     {% endfor%}    
   </tbody>
 </table>

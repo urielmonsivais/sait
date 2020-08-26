@@ -22,6 +22,9 @@ class DB():
 
     def get_connection(self):
         return self.connection
+        
+    def is_connected(self):
+        self.connection.is_connected()
 
     def close(self):
         if self.connection.is_connected():

@@ -13,6 +13,8 @@ class Auth():
     
     def check_user(self, user, pwd):
         try:
+            if self.db.is_connected() is None:
+                self.db.open()                
             sql = '''SELECT * FROM usuarios WHERE correo=%s AND pass=%s'''            
             cursor = self.db.get_connection().cursor(buffered=True)
             result = cursor.execute(sql,(user,pwd))
@@ -24,7 +26,7 @@ class Auth():
             cursor.close()
             return True
         except Exception as e:
-            print("error: ")
+            print("error auth: ")
             print(e)
             
     def logout(self):
