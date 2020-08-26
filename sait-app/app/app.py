@@ -52,7 +52,7 @@ def contact():
     try:
         msg = Message("Nueva Solicitud",
                       sender="monsivaisuriel28@gmail.com",
-                      recipients=["uriel.monsivais@sait.red", "enrique.espinoza@sait.red"])
+                      recipients=["uriel.monsivais@sait.red","hcedillo@sait.red"])
         mailBody = """ 
         Hola, nuevo correo de {0}.
 
