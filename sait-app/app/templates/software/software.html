@@ -1,13 +1,19 @@
 {% extends "layout.html" %} 
 
 {% block content %} 
-
-
-
-<button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target=".softwareModal">
-    <i class="fa fa-plus"></i>
-    Agregar Software
-</button>
+<div class="row">
+  <div class="col-6 text-left">
+    <h4 class="text-primary">
+      Software
+    </h4>
+  </div>
+  <div class="col-6 text-right">
+    <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target=".softwareModal">
+      <i class="fa fa-plus"></i>
+      Agregar Software
+  </button>
+  </div>
+</div>
 <hr>
 <table class="table table-striped">
   <thead>
@@ -41,7 +47,7 @@
             <i class="fa fa-edit"></i>
           </button>
 
-          <form action="{{ url_for('.removesoftware')}}" method="post">
+          <form style="display: inline;" action="{{ url_for('.removesoftware')}}" method="post">
             <input type="hidden" name="software_id" value="{{software.id}}">
             <button type="submit" class="btn btn-sm btn-danger">
                 <i class="fa fa-trash"></i>
@@ -84,7 +90,7 @@
                     <div class="col-12 col-sm-4">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Versión</label>
-                        <input value="{{software.version}}" type="number" name="version" class="form-control" id="version" aria-describedby="emailHelp" placeholder="Version">
+                        <input value="{{software.version}}" type="number" name="version" step=".1" class="form-control" id="version" aria-describedby="emailHelp" placeholder="Version">
                     </div>
                     </div>
                   </div>
@@ -360,7 +366,7 @@
                     <div class="col-12 col-sm-4">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Versión</label>
-                        <input type="number" name="version" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Version">
+                        <input type="number" name="version" class="form-control" step=".1" id="email" aria-describedby="emailHelp" placeholder="Version">
                     </div>
                     </div>
                   </div>

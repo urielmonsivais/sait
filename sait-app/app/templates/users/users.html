@@ -2,10 +2,19 @@
 
 {% block content %} 
 
-<button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#userModal">
+<div class="row">
+  <div class="col-6 text-left">
+    <h4 class="text-primary">
+      Usuarios
+    </h4>
+  </div>
+  <div class="col-6 text-right">
+    <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#userModal">
     <i class="fa fa-plus"></i>
     Nuevo Usuario
 </button>
+  </div>
+</div>
 <hr>
 <table class="table table-striped">
   <thead>
@@ -34,7 +43,7 @@
             <i class="fa fa-edit"></i>
           </button>
 
-          <form action="{{ url_for('.removeuser')}}" method="post">
+          <form style="display: inline;" action="{{ url_for('.removeuser')}}" method="post">
             <input type="hidden" name="user_id" value="{{user.id}}">
             <button type="submit" class="btn btn-sm btn-danger">
                 <i class="fa fa-trash"></i>

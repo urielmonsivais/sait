@@ -41,7 +41,7 @@ class Services(Model):
 
     def update(self, sw):
         try:
-
+            print('data: ',sw)
             print('data to update')
             print(sw)
             r = self.cursor.execute(
@@ -50,8 +50,8 @@ class Services(Model):
             )
             self.db.get_connection().commit()
             result = self.cursor.execute(
-                "UPDATE software SET nombre=%s, version=%s, vigencia=%s, f_compra=%s, tipo=%s,  proveedor=%s WHERE id = %s",
-                (sw['nombre'], sw['version'], sw['vigencia'], sw['f_compra'], sw['tipo'], sw['proveedor'], sw['software_id']))
+                "UPDATE servicios SET nombre=%s, caracteristicas=%s, proveedor=%s WHERE id = %s",
+                (sw['nombre'], sw['caracteristicas'], sw['proveedor'], sw['service_id']))
             self.db.get_connection().commit()
         except Error as e:
             print("Error reading data from MySQL table", e)

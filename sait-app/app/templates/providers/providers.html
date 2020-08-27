@@ -1,11 +1,19 @@
 {% extends "layout.html" %} 
 
 {% block content %} 
-
-<button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#providerModal">
+<div class="row">
+  <div class="col-6 text-left">
+    <h4 class="text-primary">
+      Proveedores
+    </h4>
+  </div>
+  <div class="col-6 text-right">
+    <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#providerModal">
     <i class="fa fa-plus"></i>
     Nuevo Proveedor
 </button>
+  </div>
+</div>
 <hr>
 <table class="table table-striped">
   <thead>
@@ -31,7 +39,7 @@
             <i class="fa fa-edit"></i>
           </button>
 
-          <form action="{{ url_for('.removeprovider')}}" method="post">
+          <form style="display: inline;" action="{{ url_for('.removeprovider')}}" method="post">
             <input type="hidden" name="proveedor_id" value="{{provider.id}}">
             <button type="submit" class="btn btn-sm btn-danger">
                 <i class="fa fa-trash"></i>

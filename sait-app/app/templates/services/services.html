@@ -2,12 +2,19 @@
 
 {% block content %} 
 
-
-
-<button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target=".serviceModal">
+<div class="row">
+  <div class="col-6 text-left">
+    <h4 class="text-primary">
+      Servicios
+    </h4>
+  </div>
+  <div class="col-6 text-right">
+    <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target=".serviceModal">
     <i class="fa fa-plus"></i>
     Agregar Servicio
 </button>
+  </div>
+</div>
 <hr>
 <table class="table table-striped">
   <thead>
@@ -33,7 +40,7 @@
             <i class="fa fa-edit"></i>
           </button>
 
-          <form action="{{ url_for('.removeservice')}}" method="post">
+          <form style="display: inline;"  action="{{ url_for('.removeservice')}}" method="post">
             <input type="hidden" name="service_id" value="{{service.id}}">
             <button type="submit" class="btn btn-sm btn-danger">
                 <i class="fa fa-trash"></i>
@@ -64,9 +71,12 @@
                     <div class="modal-body">
                         <form id="software_Edit" name="software_Edit" action="{{ url_for('.updateservice') }}"
                             method="POST">
+                            
                             <div class="container">
                               <div class="row">
                                 <div class="col-12 col-sm-6">
+                                  <input type="hidden" name="service_id" value="{{ service.id }}">
+                                  <input type="hidden" name="pago" value="{{ service.pago }}">
                                   <div class="form-group">
                                     <label for="exampleInputEmail1">Nombre</label>
                                     <input type="text" name="nombre" value="{{ service.nombre }}" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Nombre">
