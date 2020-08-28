@@ -70,7 +70,7 @@
         </button>
       </div>
               <div class="modal-body">
-             <form id="software_Edit" name="software_Edit" action="{{ url_for('.updatesoftware') }}" method="POST">
+             <form id="software_Edit{{loop.index}}" name="software_Edit{{loop.index}}" action="{{ url_for('.updatesoftware') }}" method="POST">
                 <input type="hidden" name="software_id" value="{{ software.id }}">
                 <input type="hidden" name="pago" value="{{ software.pago }}">
                 <div class="container">
@@ -187,7 +187,7 @@
         </div>
               <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-          <button type="submit" form="software_Edit" class="btn btn-primary">Guardar</button>
+          <button type="submit" form="software_Edit{{loop.index}}" class="btn btn-primary">Guardar</button>
         </div>
     </div>
   </div>
