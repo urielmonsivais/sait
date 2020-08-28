@@ -101,7 +101,7 @@ class Softwares(Model):
             f2 = date_new
             print("\n Original Date: ", date_original, "\n")
             print("\n New Date: ", date_new, "\n")
-            self.cursor.execute("""SELECT * FROM software as s inner JOIN periodo_pago as pp ON s.pago = pp.id WHERE PP.f_pago BETWEEN '{0}' AND '{1}' """.format(f1,f2))
+            self.cursor.execute("""SELECT * FROM software as s inner JOIN periodo_pago as pp ON s.pago = pp.id WHERE pp.f_pago BETWEEN '{0}' AND '{1}' """.format(f1,f2))
             records = self.cursor.fetchall()
             return [Pending(x) for x in records]
         except Error as e:

@@ -40,7 +40,7 @@ class Activos(Model):
         finally:
             self.db.close()
 
-    def update(self, sw):
+    def update(self, sw):        
         try:
 
             print('data to update')
@@ -49,10 +49,14 @@ class Activos(Model):
                 "UPDATE periodo_pago SET f_inicio=%s, f_termino=%s, f_corte=%s, f_pago=%s, periodo=%s WHERE id = %s",
                 (sw['f_inicio'],sw['f_termino'],sw['f_corte'],sw['f_pago'],sw['periodo'],sw['pago'])
             )
-            self.db.get_connection().commit()
+            #self.db.get_connection().commit()
+            # result = self.cursor.execute(
+            #     "UPDATE software SET nombre=%s, version=%s, vigencia=%s, f_compra=%s, tipo=%s,  proveedor=%s WHERE id = %s",
+            #     (sw['nombre'], sw['version'], sw['vigencia'], sw['f_compra'], sw['tipo'], sw['proveedor'], sw['software_id']))
             result = self.cursor.execute(
-                "UPDATE software SET nombre=%s, version=%s, vigencia=%s, f_compra=%s, tipo=%s,  proveedor=%s WHERE id = %s",
-                (sw['nombre'], sw['version'], sw['vigencia'], sw['f_compra'], sw['tipo'], sw['proveedor'], sw['software_id']))
+                "UPDATE activos SET nombre=%s, marca=%s, caracteristica=%s, modelo=%s, no_serie=%s,  garantia=%s,  proveedor=%s WHERE id = %s",
+                (sw['nombre'], sw['marca'], sw['caracteristica'], sw['modelo'], sw['no_serie'], sw['garantia'], sw['proveedor'],sw['activo_id']))
+
             self.db.get_connection().commit()
         except Error as e:
             print("Error reading data from MySQL table", e)
