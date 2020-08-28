@@ -2,6 +2,7 @@ from app.core.Model import Model
 from app.models.Software import Software
 from app.models.Service import Service
 from app.models.Provider import Provider
+from app.models.Activo import Activo
 from app.models.Type import Type
 from mysql.connector import Error
 from enum import Enum
@@ -92,7 +93,7 @@ class Services(Model):
         try:
             self.cursor.execute("SELECT s.*, p.nombre, pp.* FROM activos AS s INNER JOIN proveedor AS p ON s.proveedor=p.id inner JOIN periodo_pago as pp ON s.pago=pp.id WHERE s.status>=1")
             records = self.cursor.fetchall()
-            return [x for x in records]
+            return [Activo(x) for x in records]
         except Error as e:
             print("Error reading data from MySQL table", e)
         finally:

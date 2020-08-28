@@ -1,6 +1,121 @@
 {% extends "layout.html" %} 
 
 {% block content %} 
+<!-- Inicia add -->
+<div class="modal fade" id="activosModal" tabindex="-1" role="dialog" aria-labelledby="activosModal" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+     
+      <div class="modal-header">
+        <h5 class="modal-title" id="activosModal">Agregar Activo</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+              <div class="modal-body">
+             <form id="service_form" name="service_form" action="{{ url_for('.postactivos') }}" method="POST">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-12 col-sm-6">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Nombre</label>
+                        <input type="text" name="nombre" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Nombre">
+                      </div>
+                    </div>                   
+                    <div class="col-12 col-sm-6">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Proveedor</label>
+                        <select name="proveedor" id="proveedor" class="form-control">
+                          {% for provider in providers%}
+                            <option value="{{ provider.id }}">{{ provider.nombre }}</option>
+                          {% endfor%}                          
+                        </select>
+                    </div>
+                    </div>
+                    <div class="col-12">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Caracteristicas</label>
+                        <textarea class="form-control" name="caracteristicas" id="caracteristicas" placeholder="Descripción" cols="30" rows="5"></textarea>
+                      </div>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Marca</label>
+                        <input type="text" name="marca" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Marca">
+                      </div>
+                    </div> 
+                    <div class="col-12 col-sm-6">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Modelo</label>
+                        <input type="text" name="modelo" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Nombre">
+                      </div>
+                    </div>
+                    <div class="col-12 col-sm-4">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">N° Serie</label>
+                        <input type="text" name="no_serie" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Garantia">
+                    </div>
+                    </div>
+                    <div class="col-12 col-sm-4">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Garantia</label>
+                        <input type="number" name="garantia" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Garantia">
+                    </div>
+                    </div>
+
+                  </div>
+                  <div class="row">
+                    <div class="col-12">
+                      <hr>
+                      <h4 class="text">
+                        Periodos de pago
+                      </h4>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12 col-sm-4">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Fecha inicio</label>
+                        <input type="date" name="f_inicio" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Nombre">
+                      </div>
+                    </div>
+                    <div class="col-12 col-sm-4">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Fecha termino</label>
+                        <input type="date" name="f_termino" class="form-control" id="phone" aria-describedby="emailHelp" placeholder="Telefono">
+                      </div>
+                    </div>
+                    <div class="col-12 col-sm-4">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Fecha de corte</label>
+                        <input type="date" name="f_corte" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Email">
+                    </div>
+                    </div>
+                    <div class="col-12 col-sm-4">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Fecha de pago</label>
+                        <input type="date" name="f_pago" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Email">
+                    </div>
+                    </div>
+                    <div class="col-12 col-sm-4">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Periodo</label>
+                        <input type="number" name="periodo" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Meses">
+                    </div>
+                    </div>
+                    
+                  </div>
+
+                </div>                                     
+              </form>
+        </div>
+              <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="submit" form="service_form" class="btn btn-primary">Guardar</button>
+        </div>
+    </div>
+  </div>
+</div>
 <div class="row">
   <div class="col-6 text-left">
     <h4 class="text-primary">
@@ -8,7 +123,7 @@
     </h4>
   </div>
   <div class="col-6 text-right">
-    <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#userModal">
+    <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#activosModal">
     <i class="fa fa-plus"></i>
     Nuevo Activo
 </button>
@@ -23,18 +138,284 @@
       <th scope="col">Caracteristica </th>
       <th scope="col">Marca </th>
       <th scope="col">Modelo </th>
+      <th scope="col">N° Serie </th>
+      <th scope="col">Garantia </th>
+      <th scope="col">Proveedor </th>
     </tr>
   </thead>
   <tbody>
     {% for ac in activos%}
     <tr>
-      <th scope="row">{{ ac[0] }}</th>
-      <td>{{ ac[1] }}</td>
-      <td>{{ ac[2] }}</td>  
-      <td>{{ ac[3] }}</td> 
-      <td>{{ ac[4] }}</td>  
+      <th scope="row">{{ ac.id }}</th>
+      <td>{{ ac.nombre }}</td>
+      <td>{{ ac.caracteristicas }}</td>  
+      <td>{{ ac.marca }}</td> 
+      <td>{{ ac.modelo }}</td>
+      <td>{{ ac.no_serie }}</td>
+      <td>{{ ac.garantia }}</td>
+      <td>{{ ac.proveedor }}</td>
+      <td>          
+        <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#viewSoftware{{loop.index}}">
+              <i class="fa fa-eye"></i>
+            </button>
+  
+          <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#activosModalU{{loop.index}}">
+              <i class="fa fa-edit"></i>
+            </button>
+  
+            <form style="display: inline;"  action="{{ url_for('.removeactivos')}}" method="post">
+              <input type="hidden" name="service_id" value="{{ac.id}}">
+              <button type="submit" class="btn btn-sm btn-danger">
+                  <i class="fa fa-trash"></i>
+              </button>
+            </form>
+            
+        </td>  
     </tr>
+
+    <!-- inicio ver detalle -->
+    <div class="modal fade viewSoftware" id="viewSoftware{{loop.index}}" tabindex="-1" role="dialog" aria-labelledby="viewSoftware{{loop.index}}" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+         
+          <div class="modal-header">
+            <h5 class="modal-title" id="viewSoftware{{loop.index}}">Detalles de Servicio</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+                  <div class="modal-body">
+                 <form >                
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Nombre</label>
+                          <input type="text" readonly value="{{ac.nombre}}" name="nombre" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Nombre">
+                        </div>
+                      </div>                   
+                      <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Proveedor</label>
+                          <select name="proveedor" id="proveedor" disabled class="form-control">
+                            {% for provider in providers%}
+                            {% if ac.proveedor == provider.id %}
+                            <option selected value="{{ provider.id }}">{{ provider.nombre }}</option>
+                            {% endif %}
+                         
+                         {% if ac.proveedor != provider.id %}
+                            <option   value="{{ provider.id }}">{{ provider.nombre }}</option>                                                             
+                         {% endif %}
+                            {% endfor%}                          
+                          </select>
+                      </div>
+                      </div>
+                      <div class="col-12">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Caracteristicas</label>
+                          <textarea class="form-control" disabled name="caracteristicas" id="caracteristicas" placeholder="Descripción" cols="30" rows="5">{{ac.caracteristicas}}</textarea>
+                        </div>
+                      </div>
+                      <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Marca</label>
+                          <input type="text" name="marca" class="form-control" id="name" aria-describedby="emailHelp" readonly value="{{ac.marca}}" placeholder="Marca">
+                        </div>
+                      </div> 
+                      <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Modelo</label>
+                          <input type="text" name="modelo" readonly value="{{ac.modelo}}" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Nombre">
+                        </div>
+                      </div>
+                      <div class="col-12 col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Garantia</label>
+                          <input type="number" name="garantia" readonly value="{{ac.garantia}}" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Garantia">
+                      </div>
+                      </div>
+                      <div class="col-12 col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">N° Serie</label>
+                          <input type="text" name="no_serie" readonly value="{{ac.no_serie}}" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Garantia">
+                      </div>
+                      </div>
+  
+                    </div>
+                    <div class="row">
+                      <div class="col-12">
+                        <hr>
+                        <h4 class="text">
+                          Periodos de pago
+                        </h4>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-12 col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Fecha inicio</label>
+                          <input type="date" name="f_inicio" readonly value="{{ac.f_inicio}}" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Nombre">
+                        </div>
+                      </div>
+                      <div class="col-12 col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Fecha termino</label>
+                          <input type="date" name="f_termino" class="form-control" readonly value="{{ac.f_termino}}" id="phone" aria-describedby="emailHelp" placeholder="Telefono">
+                        </div>
+                      </div>
+                      <div class="col-12 col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Fecha de corte</label>
+                          <input type="date" name="f_corte" class="form-control" readonly value="{{ac.f_corte}}" id="email" aria-describedby="emailHelp" placeholder="Email">
+                      </div>
+                      </div>
+                      <div class="col-12 col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Fecha de pago</label>
+                          <input type="date" name="f_pago" class="form-control" readonly value="{{ac.f_pago}}" id="email" aria-describedby="emailHelp" placeholder="Email">
+                      </div>
+                      </div>
+                      <div class="col-12 col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Periodo</label>
+                          <input type="number" name="periodo" class="form-control" id="email" readonly value="{{ac.periodo}}" aria-describedby="emailHelp" placeholder="Meses">
+                      </div>
+                      </div>
+                      
+                    </div>
+  
+                  </div>                                      
+                  </form>
+            </div>
+                  <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>          
+            </div>
+        </div>
+      </div>
+    </div>
+    <!-- fin ver detalle -->
+    <!-- inicio update activo -->
+    <div class="modal fade " id="activosModalU{{loop.index}}" tabindex="-1" role="dialog" aria-labelledby="serviceModal{{loop.index}}" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+         
+          <div class="modal-header">
+            <h5 class="modal-title" id="activosModal">Agregar Activo</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+                  <div class="modal-body">
+                 <form id="service_form" name="service_form" action="{{ url_for('.updateactivos') }}" method="POST">
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-12 col-sm-6">
+                          <div class="form-group">
+                            <label for="exampleInputEmail1">Nombre</label>
+                            <input type="text" name="nombre" class="form-control" id="name" value="{{ac.nombre}}" aria-describedby="emailHelp" placeholder="Nombre">
+                          </div>
+                        </div>                   
+                        <div class="col-12 col-sm-6">
+                          <div class="form-group">
+                            <label for="exampleInputEmail1">Proveedor</label>
+                            <select name="proveedor" id="proveedor" class="form-control">
+                              {% for provider in providers%}
+                                <option value="{{ provider.id }}">{{ provider.nombre }}</option>
+                              {% endfor%}                          
+                            </select>
+                        </div>
+                        </div>
+                        <div class="col-12">
+                          <div class="form-group">
+                            <label for="exampleInputEmail1">Caracteristicas</label>
+                            <textarea class="form-control" name="caracteristicas" id="caracteristicas" placeholder="Descripción" cols="30" rows="5">{{ac.caracteristicas}}</textarea>
+                          </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                          <div class="form-group">
+                            <label for="exampleInputEmail1">Marca</label>
+                            <input type="text" name="marca" class="form-control" id="name" value="{{ac.marca}}" aria-describedby="emailHelp" placeholder="Marca">
+                          </div>
+                        </div> 
+                        <div class="col-12 col-sm-6">
+                          <div class="form-group">
+                            <label for="exampleInputEmail1">Modelo</label>
+                            <input type="text" name="modelo" class="form-control" id="name" value="{{ac.modelo}}" aria-describedby="emailHelp" placeholder="Nombre">
+                          </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                          <div class="form-group">
+                            <label for="exampleInputEmail1">N° Serie</label>
+                            <input type="text" name="no_serie" class="form-control" value="{{ac.no_serie}}" id="email" aria-describedby="emailHelp" placeholder="Garantia">
+                        </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                          <div class="form-group">
+                            <label for="exampleInputEmail1">Garantia</label>
+                            <input type="number" name="garantia" class="form-control" id="email" value="{{ac.garantia}}" aria-describedby="emailHelp" placeholder="Garantia">
+                        </div>
+                        </div>
+    
+                      </div>
+                      <div class="row">
+                        <div class="col-12">
+                          <hr>
+                          <h4 class="text">
+                            Periodos de pago
+                          </h4>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-12 col-sm-4">
+                          <div class="form-group">
+                            <label for="exampleInputEmail1">Fecha inicio</label>
+                            <input type="date" name="f_inicio" class="form-control" id="name" aria-describedby="emailHelp" value="{{ac.f_inicio}}" placeholder="Nombre">
+                          </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                          <div class="form-group">
+                            <label for="exampleInputEmail1">Fecha termino</label>
+                            <input type="date" name="f_termino" class="form-control" value="{{ac.f_termino}}" id="phone" aria-describedby="emailHelp" placeholder="Telefono">
+                          </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                          <div class="form-group">
+                            <label for="exampleInputEmail1">Fecha de corte</label>
+                            <input type="date" name="f_corte" class="form-control" id="email" value="{{ac.f_corte}}" aria-describedby="emailHelp" placeholder="Email">
+                        </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                          <div class="form-group">
+                            <label for="exampleInputEmail1">Fecha de pago</label>
+                            <input type="date" name="f_pago" class="form-control" id="email" aria-describedby="emailHelp" value="{{ac.f_pago}}" placeholder="Email">
+                        </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                          <div class="form-group">
+                            <label for="exampleInputEmail1">Periodo</label>
+                            <input type="number" name="periodo" class="form-control" id="email" aria-describedby="emailHelp" value="{{ac.periodo}}" placeholder="Meses">
+                        </div>
+                        </div>
+                        
+                      </div>
+    
+                    </div>                                     
+                  </form>
+            </div>
+                  <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+              <button type="submit" form="service_form" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+      </div>
+    </div>
+    <!-- fin update activo -->
     {% endfor%}    
   </tbody>
 </table>
+
+
+
+<!-- fin add -->
+
 {% endblock %}

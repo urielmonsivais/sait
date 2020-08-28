@@ -1,5 +1,6 @@
 from app.core.Model import Model
 from app.models.User import User
+from app.models.Company import Company
 from mysql.connector import Error
 from enum import Enum
 
@@ -63,6 +64,29 @@ class Users(Model):
                 "SELECT usuarios.*, sucursal.nombre FROM usuarios INNER JOIN sucursal on usuarios.sucursal = sucursal.id WHERE usuarios.status>=1")
             records = self.cursor.fetchall()
             return [User(x) for x in records]
+        except Error as e:
+            print("Error reading data from MySQL table", e)
+        finally:
+            self.db.close()
+
+    def getCompany(self):
+        try:
+            self.cursor.execute(
+                "select empresa.id as id, empresa.nombre as nombre, empresa.rfc as rfc , empresa.razon_social, sucursal.nombre as sucursal, sucursal.ciudad, sucursal.cp, sucursal.telefono from empresa,sucursal where empresa.id = 1 and sucursal.id = 1")
+            records = self.cursor.fetchall()
+            return [Company(x) for x in records][0]
+        except Error as e:
+            print("Error reading data from MySQL table", e)
+        finally:
+            self.db.close()
+
+    def updateCompany(self, d):
+        try:
+            result = self.cursor.execute("UPDATE empresa SET nombre=%s, rfc=%s, razon_social=%s", (d['nombre'], d['rfc'], d['razon_social']))
+            self.db.get_connection().commit()
+
+            result = self.cursor.execute("UPDATE sucursal SET nombre=%s, ciudad=%s, cp=%s, telefono=%s", (d['sucursal'], d['ciudad'], d['codigo_postal'], d['telefono']))
+            self.db.get_connection().commit()
         except Error as e:
             print("Error reading data from MySQL table", e)
         finally:

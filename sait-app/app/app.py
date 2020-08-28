@@ -9,6 +9,7 @@ from app.users.Users import Users
 from app.users.Providers import Providers
 from app.users.Services import Services
 from app.users.Software import Softwares
+from app.users.Activos import Activos
 #from app.users.Activos import activos
 import os
 load_dotenv()
@@ -232,9 +233,51 @@ def removeservice():
     del s
     return redirect(url_for('services'))
 
+# activos
 @app.route('/activos')
 def activos():
     s = Services(cDb)
     ac = s.getActivos()
     print(ac)
-    return render_template('activos/activos.html', activos=ac,actions=[],currentUser=session['current_user'])
+    return render_template('activos/activos.html',providers=s.getProviders(), activos=ac,actions=[],currentUser=session['current_user'])
+
+@app.route('/activos', methods=['POST'])
+def postactivos():
+    req = request.form
+    print("---")
+    print(req)
+    s = Activos(cDb)
+    s.add(req)
+    del s
+    return redirect(url_for('activos'))
+
+@app.route('/uactivos', methods=['POST'])
+def updateactivos():
+    req = request.form
+    s = Activos(cDb)
+    s.update(req)
+    del s
+    return redirect(url_for('activos'))
+
+@app.route('/dactive', methods=['POST'])
+def removeactivos():
+    req = request.form
+    s = Activos(cDb)
+    s.remove(req)
+    del s
+    return redirect(url_for('activos'))
+
+@app.route('/panel')
+def panel():
+    users = Users(cDb)
+    c = users.getCompany()
+    print(c.nombre)
+    return render_template('panel.html',company=c,currentUser=session['current_user'])
+
+@app.route('/update_company', methods=['POST'])
+def update_company():
+    req= request.form
+    s=Users(cDb)
+    s.updateCompany(req)
+    del s
+    return redirect(url_for('panel'))

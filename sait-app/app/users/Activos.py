@@ -23,8 +23,8 @@ class Activos(Model):
             self.db.get_connection().commit()
             periodo_id = self.cursor.lastrowid            
             result = self.cursor.execute(
-                "INSERT INTO servicios (id,nombre, caracteristicas, pago, proveedor, status) values (%s,%s,%s,%s,%s,%s)",
-                (None, soft_data['nombre'], soft_data['caracteristicas'], periodo_id, soft_data['proveedor'],1))            
+                "INSERT INTO activos (id,nombre, caracteristica, marca, modelo, no_serie, garantia, pago, proveedor, status) values (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",
+                (None, soft_data['nombre'], soft_data['caracteristicas'], soft_data['marca'], soft_data['modelo'], soft_data['no_serie'], soft_data['garantia'], periodo_id, soft_data['proveedor'],1))            
             self.db.get_connection().commit()
         except Error as e:
             print("Error reading data from MySQL table", e)
@@ -33,7 +33,7 @@ class Activos(Model):
 
     def remove(self, sw):
         try:
-            result = self.cursor.execute("UPDATE servicios SET status=%s WHERE id = %s",(0,sw['service_id']))
+            result = self.cursor.execute("UPDATE activos SET status=%s WHERE id = %s",(0,sw['service_id']))
             self.db.get_connection().commit()
         except Error as e:
             print("Error reading data from MySQL table", e)
