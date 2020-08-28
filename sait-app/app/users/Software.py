@@ -101,9 +101,20 @@ class Softwares(Model):
             f2 = date_new
             print("\n Original Date: ", date_original, "\n")
             print("\n New Date: ", date_new, "\n")
-            self.cursor.execute("""SELECT * FROM software as s inner JOIN periodo_pago as pp ON s.pago = pp.id WHERE pp.f_pago BETWEEN '{0}' AND '{1}' """.format(f1,f2))
+            self.cursor.execute("""SELECT s.nombre, pp.f_inicio, pp.f_termino, pp.f_pago FROM activos as s inner JOIN periodo_pago as pp ON s.pago = pp.id WHERE pp.f_pago BETWEEN '{0}' AND '{1}' """.format(f1,f2))
             records = self.cursor.fetchall()
-            return [Pending(x) for x in records]
+
+            allR = [Pending(x) for x in records]
+
+            self.cursor.execute("""SELECT s.nombre, pp.f_inicio, pp.f_termino, pp.f_pago FROM software as s inner JOIN periodo_pago as pp ON s.pago = pp.id WHERE pp.f_pago BETWEEN '{0}' AND '{1}' """.format(f1,f2))
+            records = self.cursor.fetchall()
+            allR.extend([Pending(x) for x in records])
+
+            self.cursor.execute("""SELECT s.nombre, pp.f_inicio, pp.f_termino, pp.f_pago FROM servicios as s inner JOIN periodo_pago as pp ON s.pago = pp.id WHERE pp.f_pago BETWEEN '{0}' AND '{1}' """.format(f1,f2))
+            records = self.cursor.fetchall()
+            allR.extend([Pending(x) for x in records])
+
+            return allR
         except Error as e:
             pass
     def __del__(self):
